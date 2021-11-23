@@ -1,22 +1,18 @@
-import { Container, ContainerProps, Text } from "@chakra-ui/react";
-import NavBar from "./NavBar";
+import { Text } from "@chakra-ui/react";
+import Footer from "./Footer";
 import styles from "./Layout.module.css";
-import Dashboard from "./Dashboard";
+import NavBar from "./NavBar";
 
-const Layout: React.FC<ContainerProps> = ({ children, ...props }) => {
+const Layout: React.FC = ({ children }) => {
   return (
-    <Container maxWidth="100%" p={0} {...props}>
-      <header>
-        <NavBar />
-      </header>
+    <>
+      <NavBar />
 
       <main className={styles.main}>{children}</main>
 
-      <footer className={styles.footer}>
-        <Text>Brought to you by 🍓</Text>
-      </footer>
-    </Container>
+      <Footer />
+    </>
   );
 };
 
-export default Layout
+export default Layout;
