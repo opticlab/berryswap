@@ -1,6 +1,6 @@
 import { Center, Flex, HStack, Spacer } from "@chakra-ui/layout";
-import { Link } from "@chakra-ui/react";
 import { useCaverJsReact } from "@sixnetwork/caverjs-react-core";
+import Link from "next/link";
 import ConnectWalletButton from "./ConnectWalletButton";
 import DisconnectWalletButton from "./DisconnectWalletButton";
 import Logo from "./Logo";
