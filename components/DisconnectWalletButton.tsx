@@ -1,10 +1,8 @@
-import { Button } from "@chakra-ui/button";
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
-import { useCaverJsReact } from "@sixnetwork/caverjs-react-core";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { useRouter } from "next/dist/client/router";
-import { useCallback, useMemo } from "react";
-import { BASE_SCAN_URLS, Network, networkByChainId } from "../utils/network";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { useCaverJsReact } from "@sixnetwork/caverjs-react-core";
+import { useCallback } from "react";
+import { BASE_SCAN_URLS, networkByChainId } from "../utils/network";
 
 const DisconnectWalletButton: React.FC = () => {
   const { account, deactivate, chainId } = useCaverJsReact();
