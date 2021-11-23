@@ -1,6 +1,5 @@
-import { Text, HStack, Button } from "@chakra-ui/react";
+import { Button, HStack, Text } from "@chakra-ui/react";
 import BerryTokenLogo from "./BerryTokenLogo";
-import Card from "./Card";
 import JuiceTokenLogo from "./JuiceTokenLogo";
 
 const TokenPrices: React.FC = () => {
