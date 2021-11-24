@@ -5,13 +5,13 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import tokens from "../utils/tokens";
+import tokens, { Token } from "../utils/tokens";
 import SelectTokenModal from "./SelectTokenModal";
 
 export interface TokenWithAmountProps {
-  token?: string;
+  token?: Token;
   amount?: number;
-  onTokenChanged: (token: string) => void;
+  onTokenChanged: (token: Token) => void;
 }
 
 const TokenWithAmount: React.FC<TokenWithAmountProps> = ({
@@ -26,7 +26,7 @@ const TokenWithAmount: React.FC<TokenWithAmountProps> = ({
       <InputGroup>
         <Input value={amount} placeholder="amount" variant="filled" />
         <InputRightAddon onClick={onOpen}>
-          <Text minWidth="4rem">{token}</Text>
+          <Text minWidth="4rem">{token?.name}</Text>
         </InputRightAddon>
       </InputGroup>
       <SelectTokenModal

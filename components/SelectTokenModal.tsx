@@ -7,13 +7,14 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
+import { Token } from "../utils/tokens";
 
 export interface SelectTokenModalProps {
   isOpen: boolean;
   onClose: () => void;
-  tokens: string[];
-  selected?: string;
-  onSelect: (token: string) => void;
+  tokens: Token[];
+  selected?: Token;
+  onSelect: (token: Token) => void;
 }
 
 const SelectTokenModal: React.FC<SelectTokenModalProps> = ({
@@ -34,7 +35,7 @@ const SelectTokenModal: React.FC<SelectTokenModalProps> = ({
                 bg={token === selected ? "brand.400" : "brand.800"}
                 height="4rem"
                 fontSize="lg"
-                key={token}
+                key={token.address}
                 p="1rem"
                 justifyContent="center"
                 onClick={() => {
@@ -42,7 +43,7 @@ const SelectTokenModal: React.FC<SelectTokenModalProps> = ({
                   props.onClose();
                 }}
               >
-                {token}
+                {token.name}
               </ListItem>
             ))}
           </List>
