@@ -8,6 +8,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { Token } from "../utils/tokens";
+import TokenRow from "./TokenRow";
 
 export interface SelectTokenModalProps {
   isOpen: boolean;
@@ -17,12 +18,12 @@ export interface SelectTokenModalProps {
   onSelect: (token: Token) => void;
 }
 
-const SelectTokenModal: React.FC<SelectTokenModalProps> = ({
+export default function SelectTokenModal({
   tokens,
   selected,
   onSelect,
   ...props
-}) => {
+}: SelectTokenModalProps) {
   return (
     <Modal isCentered {...props}>
       <ModalOverlay />
@@ -43,7 +44,7 @@ const SelectTokenModal: React.FC<SelectTokenModalProps> = ({
                   props.onClose();
                 }}
               >
-                {token.name}
+                <TokenRow token={token} />
               </ListItem>
             ))}
           </List>
@@ -51,6 +52,4 @@ const SelectTokenModal: React.FC<SelectTokenModalProps> = ({
       </ModalContent>
     </Modal>
   );
-};
-
-export default SelectTokenModal;
+}
