@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import { useCaverJsReact } from '@sixnetwork/caverjs-react-core'
 import { CaverProvider } from 'klaytn-providers'
 import { simpleRpcProvider } from '../utils/providers'
@@ -21,5 +21,13 @@ export const useActiveCaverReact = (): CaverJsReactContextInterface<CaverProvide
     }
   }, [library])
 
-  return { library: provider, chainId: chainId ?? parseInt(process.env.NEXT_PUBLIC_CHAIN_ID, 10), ...caverJsReact }
+  const fallbackChainId = useMemo(() => {
+    if (process.env.NODE_PUBLIC_CHAIN_ID) {
+      return parseInt(process.env.NODE_PUBLIC_CHAIN_ID, 10)
+    } else {
+      return 1001
+    }
+  }, [])
+
+  return { library: provider, chainId: chainId ?? fallbackChainId, ...caverJsReact }
 };
