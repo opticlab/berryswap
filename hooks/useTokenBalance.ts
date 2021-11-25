@@ -11,15 +11,13 @@ export function useTokenBalance(token: Token) {
   const tokenContract = useTokenContract(token.address);
 
   useEffect(() => {
-    if (account) {
-      async function fetchBalance() {
-        if (tokenContract != undefined) {
-          setBalance(await tokenContract.balanceOf(account));
-        }
+    async function fetchBalance() {
+      if (tokenContract && account) {
+        setBalance(await tokenContract.balanceOf(account));
       }
-
-      fetchBalance();
     }
+
+    fetchBalance();
   }, [tokenContract, account]);
 
   return balance;
