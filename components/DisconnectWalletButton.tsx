@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { useCaverJsReact } from "@sixnetwork/caverjs-react-core";
-import { BigNumber } from "ethers";
+import { formatUnits } from "ethers/lib/utils";
 import { useCallback, useMemo } from "react";
 import { useKlayBalance } from "../hooks/useKlayBalance";
 import { BASE_SCAN_URLS, networkByChainId } from "../utils/network";
@@ -18,13 +18,7 @@ export default function DisconnectWalletButton() {
   }, [chainId, account]);
   const klayBalance = useKlayBalance();
   const formattedBalance = useMemo(
-    () => {
-      const balanceString = klayBalance.toString()
-      const decimalPointPosition = balanceString.length - 18
-      const decimalString = balanceString.slice(0, decimalPointPosition) + '.' + balanceString.slice(decimalPointPosition, decimalPointPosition + 6)
-
-      return decimalString
-    },
+    () => formatUnits(klayBalance),
     [klayBalance],
   );
 
