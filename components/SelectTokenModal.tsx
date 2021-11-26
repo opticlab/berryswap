@@ -36,7 +36,7 @@ export default function SelectTokenModal({
                 bg={token === selected ? "brand.400" : "brand.800"}
                 height="4rem"
                 fontSize="lg"
-                key={token.address}
+                key={token.name}
                 p="1rem"
                 justifyContent="center"
                 onClick={() => {

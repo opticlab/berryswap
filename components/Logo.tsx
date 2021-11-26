@@ -1,14 +1,18 @@
-import { HStack, Text } from "@chakra-ui/layout";
+import { HStack, Text, useBreakpoint } from "@chakra-ui/react";
 
-const Logo: React.FC = (props) => {
+export default function Logo() {
+  const breakpoint = useBreakpoint();
+
   return (
-    <HStack {...props} fontSize="3xl">
+    <HStack fontSize="3xl">
       <Text>🍓</Text>
-      <Text fontSize="3xl" fontWeight="bold">
-        BerrySwap
-      </Text>
+      {breakpoint == "md" ? (
+        <Text fontSize="3xl" fontWeight="bold">
+          BerrySwap
+        </Text>
+      ) : (
+        <></>
+      )}
     </HStack>
   );
-};
-
-export default Logo;
+}

@@ -8,6 +8,11 @@ import { BASE_SCAN_URLS, networkByChainId } from "../utils/network";
 
 export default function DisconnectWalletButton() {
   const { account, deactivate, chainId } = useCaverJsReact();
+  const shortendAccount = useMemo(() => {
+    if (account) {
+      return `${account?.slice(0, 6)}...${account?.slice(account.length - 4)}`;
+    }
+  }, [account]);
   const viewOnScan = useCallback(() => {
     if (chainId) {
       const network = networkByChainId[chainId];
@@ -25,10 +30,10 @@ export default function DisconnectWalletButton() {
   return (
     <Menu placement="bottom-end">
       <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-        {`${account?.slice(0, 6)}...${account?.slice(account.length - 4)}`}
+        {shortendAccount}
       </MenuButton>
       <MenuList>
-        <MenuItem>Klay - {formattedBalance.toString()}</MenuItem>
+        <MenuItem>Klay - {formattedBalance}</MenuItem>
         <MenuItem onClick={viewOnScan}>View on scan</MenuItem>
         <MenuItem onClick={deactivate}>Disconnect</MenuItem>
       </MenuList>

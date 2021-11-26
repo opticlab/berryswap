@@ -1,23 +1,11 @@
-import {
-  Center,
-  Code,
-  Heading,
-  Link,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/layout";
-import Card from "./Card";
+import { Center, Heading } from "@chakra-ui/react";
 
-const Dashboard: React.FC = () => {
+export default function Dashboard() {
   return (
-    <>
-      <Center>
-        <Heading as="h1" size="4xl">
-          Dashboard goes here
-        </Heading>
-      </Center>
-    </>
+    <Center>
+      <Heading as="h1" size="4xl">
+        Dashboard goes here
+      </Heading>
+    </Center>
   );
-};
-
-export default Dashboard;
+}

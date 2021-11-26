@@ -1,9 +1,8 @@
-import { Text } from "@chakra-ui/react";
 import Footer from "./Footer";
 import styles from "./Layout.module.css";
 import NavBar from "./NavBar";
 
-const Layout: React.FC = ({ children }) => {
+export default function Layout({ children }: { children: JSX.Element }) {
   return (
     <>
       <NavBar />
@@ -13,6 +12,4 @@ const Layout: React.FC = ({ children }) => {
       <Footer />
     </>
   );
-};
-
-export default Layout;
+}
