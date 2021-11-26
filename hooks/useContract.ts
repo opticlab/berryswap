@@ -2,7 +2,7 @@ import { Contract } from "ethers";
 import { useMemo } from "react";
 import ERC20_ABI from "../contracts/abi/erc20.json";
 import { useActiveCaverReact } from "./useActiveCaverJsReact";
-import { Erc20 } from "../contracts/types";
+import { ERC20 } from "../contracts/types";
 
 export function useContract(address: string | undefined, abi: any) {
   const { library } = useActiveCaverReact();
@@ -17,5 +17,5 @@ export function useContract(address: string | undefined, abi: any) {
 }
 
 export function useTokenContract(tokenAddress?: string) {
-  return useContract(tokenAddress, ERC20_ABI) as Erc20;
+  return useContract(tokenAddress, ERC20_ABI) as ERC20;
 }

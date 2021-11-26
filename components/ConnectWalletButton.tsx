@@ -4,7 +4,7 @@ import { useModal } from "@chakra-ui/modal";
 import ConnectWalletModal from "./ConnectWalletModal";
 
 const ConnectWalletButton: React.FC = () => {
-  const { onOpen, ...modalProps } = useDisclosure()
+  const { onOpen, ...modalProps } = useDisclosure();
 
   return (
     <>
@@ -14,4 +14,4 @@ const ConnectWalletButton: React.FC = () => {
   );
 };
 
-export default ConnectWalletButton
+export default ConnectWalletButton;

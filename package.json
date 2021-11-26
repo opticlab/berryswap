@@ -8,8 +8,8 @@
     "lint": "next lint",
     "postinstall": "husky install",
     "prepare": "run-p compile-types",
-    "format:check": "prettier --check */**/*.{js,ts}",
-    "format:write": "prettier --write */**/*.{js,ts}",
+    "format:check": "prettier --check */**/*.{js,ts,jsx,tsx}",
+    "format:write": "prettier --write */**/*.{js,ts,jsx,tsx}",
     "compile-types": "typechain --target ethers-v5 --out-dir contracts/types './contracts/abi/*.json'"
   },
   "husky": {
