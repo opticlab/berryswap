@@ -1,6 +1,6 @@
 import { Contract } from "ethers";
 import { useMemo } from "react";
-import ERC20_ABI from "../contracts/abi/erc20.json";
+import ERC20_ABI from "../contracts/abi/ERC20.json";
 import { useActiveCaverReact } from "./useActiveCaverJsReact";
 import { ERC20 } from "../contracts/types";
 
