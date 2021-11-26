@@ -8,7 +8,15 @@
     "lint": "next lint",
     "postinstall": "husky install",
     "prepare": "run-p compile-types",
+    "format:check": "prettier --check */**/*.{js,ts}",
+    "format:write": "prettier --write */**/*.{js,ts}",
     "compile-types": "typechain --target ethers-v5 --out-dir contracts/types './contracts/abi/*.json'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format:check",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",

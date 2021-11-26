@@ -12,10 +12,10 @@ export function useContract(address: string | undefined, abi: any) {
       return new Contract(address, abi, library);
     }
 
-    return null
+    return null;
   }, [library, address, abi]);
 }
 
 export function useTokenContract(tokenAddress?: string) {
-  return useContract(tokenAddress, ERC20_ABI) as Erc20
+  return useContract(tokenAddress, ERC20_ABI) as Erc20;
 }
