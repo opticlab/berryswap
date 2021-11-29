@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/layout";
+import { Text } from "@chakra-ui/react";
 import styles from "./Footer.module.css";
 
 const Footer: React.FC = () => {

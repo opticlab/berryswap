@@ -1,4 +1,4 @@
-import { Center, Flex, HStack, Spacer } from "@chakra-ui/layout";
+import { Center, Flex, HStack, Spacer } from "@chakra-ui/react";
 import { useBreakpoint } from "@chakra-ui/react";
 import { useCaverJsReact } from "@sixnetwork/caverjs-react-core";
 import Link from "next/link";

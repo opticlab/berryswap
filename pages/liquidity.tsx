@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/layout";
+import { Heading } from "@chakra-ui/react";
 import { NextPage } from "next";
 
 const Liquidity: NextPage = () => {
