@@ -11,12 +11,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <CaverJsReactProvider getLibrary={getLibrary}>
+        <Head>
+          <title>BerrySwap</title>
+          <meta name="description" content="Trade your berries here" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <Layout>
-          <Head>
-            <title>BerrySwap</title>
-            <meta name="description" content="Trade your berries here" />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
           <Component {...pageProps} />
         </Layout>
       </CaverJsReactProvider>
