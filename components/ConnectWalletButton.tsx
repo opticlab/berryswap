@@ -1,14 +1,14 @@
 import { Button, Text, useBreakpoint, useDisclosure } from "@chakra-ui/react";
 import ConnectWalletModal from "./ConnectWalletModal";
 
-const ConnectWalletButton: React.FC = () => {
+export default function ConnectWalletButton() {
   const breakpoint = useBreakpoint();
   const { onOpen, ...modalProps } = useDisclosure();
 
   return (
     <>
       <Button onClick={onOpen}>
-        {breakpoint == "md" ? (
+        {breakpoint != "sm" ? (
           <Text>Connect Wallet</Text>
         ) : (
           <Text fontWeight="normal">👛</Text>
@@ -17,6 +17,4 @@ const ConnectWalletButton: React.FC = () => {
       <ConnectWalletModal {...modalProps} />
     </>
   );
-};
-
-export default ConnectWalletButton;
+}

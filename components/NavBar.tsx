@@ -41,7 +41,7 @@ export default function NavBar() {
         <Spacer />
         <Center>
           <HStack>
-            {breakpoint == "md" ? <TokenPrices /> : <></>}
+            {breakpoint != "sm" ? <TokenPrices /> : <></>}
             {account ? <DisconnectWalletButton /> : <ConnectWalletButton />}
           </HStack>
         </Center>
