@@ -2,7 +2,7 @@ import { Button, HStack, Text } from "@chakra-ui/react";
 import BerryTokenLogo from "./BerryTokenLogo";
 import JuiceTokenLogo from "./JuiceTokenLogo";
 
-const TokenPrices: React.FC = () => {
+export default function TokenPrices() {
   return (
     <HStack>
       <Button>
@@ -19,6 +19,4 @@ const TokenPrices: React.FC = () => {
       </Button>
     </HStack>
   );
-};
-
-export default TokenPrices;
+}

@@ -14,11 +14,11 @@ export interface TokenWithAmountProps {
   onTokenChanged: (token: Token) => void;
 }
 
-const TokenWithAmount: React.FC<TokenWithAmountProps> = ({
+export default function TokenWithAmount({
   token,
   amount,
   onTokenChanged,
-}) => {
+}: TokenWithAmountProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -38,6 +38,4 @@ const TokenWithAmount: React.FC<TokenWithAmountProps> = ({
       />
     </>
   );
-};
-
-export default TokenWithAmount;
+}

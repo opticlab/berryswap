@@ -22,10 +22,10 @@ interface ConnectWalletModalProps {
   onClose: () => void;
 }
 
-const ConnectWalletModal: React.FC<ConnectWalletModalProps> = ({
+export default function ConnectWalletModal({
   onClose,
   ...props
-}) => {
+}: ConnectWalletModalProps) {
   const { account, activate, deactivate } = useCaverJsReact();
   const toast = useToast({ position: "top-end" });
   const login = useCallback(
@@ -81,6 +81,4 @@ const ConnectWalletModal: React.FC<ConnectWalletModalProps> = ({
       </ModalContent>
     </Modal>
   );
-};
-
-export default ConnectWalletModal;
+}

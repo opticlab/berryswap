@@ -1,7 +1,5 @@
 import { Text } from "@chakra-ui/react";
 
-const BerryTokenLogo: React.FC = () => {
+export default function BerryTokenLogo() {
   return <Text fontWeight="normal">🍓</Text>;
-};
-
-export default BerryTokenLogo;
+}
