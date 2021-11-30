@@ -2,39 +2,72 @@ import {
   Input,
   InputGroup,
   InputRightAddon,
+  NumberInput,
+  NumberInputField,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { isBigNumberish } from "@ethersproject/bignumber/lib/bignumber";
+import { BigNumber } from "ethers";
+import { useCallback } from "react";
+import { TokenAmount } from "../state/atom/swap";
 import tokens, { Token } from "../utils/tokens";
 import SelectTokenModal from "./SelectTokenModal";
 
 export interface TokenWithAmountProps {
-  token?: Token;
-  amount?: number;
-  onTokenChanged: (token: Token) => void;
+  tokenAmount?: TokenAmount;
+  onTokenAmountChange: (tokenAmount?: TokenAmount) => void;
 }
 
 export default function TokenWithAmount({
-  token,
-  amount,
-  onTokenChanged,
+  tokenAmount,
+  onTokenAmountChange,
 }: TokenWithAmountProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleTokenChange = useCallback(
+    (token) => {
+      onTokenAmountChange({
+        token: token,
+        amount: BigNumber.from(0),
+      });
+    },
+    [onTokenAmountChange],
+  );
+  const handleAmountChange = useCallback(
+    (valueString) => {
+      if (tokenAmount) {
+        onTokenAmountChange({
+          ...tokenAmount,
+          amount: BigNumber.from(valueString),
+        });
+      }
+    },
+    [onTokenAmountChange, tokenAmount],
+  );
 
   return (
     <>
       <InputGroup>
-        <Input value={amount} placeholder="amount" variant="filled" />
+        <NumberInput
+          value={tokenAmount?.amount.toString()}
+          onChange={handleAmountChange}
+          placeholder="amount"
+          variant="filled"
+          isDisabled={!tokenAmount}
+        >
+          <NumberInputField />
+        </NumberInput>
         <InputRightAddon onClick={onOpen}>
-          <Text minWidth="4rem">{token?.name}</Text>
+          <Text minWidth="4rem">{tokenAmount?.token.name}</Text>
         </InputRightAddon>
       </InputGroup>
       <SelectTokenModal
         isOpen={isOpen}
         onClose={onClose}
         tokens={tokens}
-        selected={token}
-        onSelect={(token) => onTokenChanged(token)}
+        selected={tokenAmount?.token}
+        onSelect={handleTokenChange}
       />
     </>
   );

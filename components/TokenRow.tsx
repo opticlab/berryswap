@@ -8,7 +8,7 @@ export interface TokenRowProps {
 }
 
 export default function TokenRow({ token }: TokenRowProps) {
-  const { name, address, decimal } = token;
+  const { name, address, decimals } = token;
 
   const balance = useTokenBalance(token);
 
@@ -17,7 +17,7 @@ export default function TokenRow({ token }: TokenRowProps) {
       <Text>{name}</Text>
       <Spacer />
       {address && balance ? (
-        <Text fontSize="sm">{formatUnits(balance, decimal)}</Text>
+        <Text fontSize="sm">{formatUnits(balance, decimals)}</Text>
       ) : (
         <></>
       )}
