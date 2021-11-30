@@ -12,9 +12,11 @@ import { TokenAmount } from "../state/swap";
 import tokens from "../utils/tokens";
 import SelectTokenModal from "./SelectTokenModal";
 
+const BIGNUMBER_ZERO = BigNumber.from(0);
+
 export interface TokenWithAmountProps {
   tokenAmount?: TokenAmount;
-  onTokenAmountChange: (tokenAmount?: TokenAmount) => void;
+  onTokenAmountChange: (tokenAmount: TokenAmount) => void;
 }
 
 export default function TokenWithAmount({
@@ -27,17 +29,19 @@ export default function TokenWithAmount({
     (token) => {
       onTokenAmountChange({
         token: token,
-        amount: BigNumber.from(0),
+        amount: BIGNUMBER_ZERO,
       });
     },
     [onTokenAmountChange],
   );
   const handleAmountChange = useCallback(
-    (valueString) => {
+    (valueString, valueNumber) => {
       if (tokenAmount) {
         onTokenAmountChange({
           ...tokenAmount,
-          amount: BigNumber.from(valueString),
+          amount: !isNaN(valueNumber)
+            ? BigNumber.from(valueNumber)
+            : BIGNUMBER_ZERO,
         });
       }
     },
@@ -48,9 +52,13 @@ export default function TokenWithAmount({
     <>
       <InputGroup>
         <NumberInput
-          value={tokenAmount?.amount.toString()}
+          value={
+            tokenAmount && tokenAmount.amount.gt(0)
+              ? tokenAmount.amount.toString()
+              : ""
+          }
           onChange={handleAmountChange}
-          placeholder="amount"
+          placeholder="0.0"
           variant="filled"
           isDisabled={!tokenAmount}
         >

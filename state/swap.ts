@@ -7,6 +7,11 @@ export type TokenAmount = {
   amount: BigNumber;
 };
 
+export enum Field {
+  INPUT,
+  OUTPUT,
+}
+
 export type SwapState = {
   tokenA: TokenAmount | undefined;
   tokenB: TokenAmount | undefined;

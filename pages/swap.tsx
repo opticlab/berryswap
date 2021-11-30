@@ -1,9 +1,11 @@
-import { Button, Container, VStack } from "@chakra-ui/react";
+import { ArrowUpDownIcon } from "@chakra-ui/icons";
+import { Button, Container, IconButton, VStack } from "@chakra-ui/react";
 import { NextPage } from "next";
+import { useMemo } from "react";
 import { useCallback } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TokenWithAmount from "../components/TokenWithAmount";
-import { swapActionState, swapState, TokenAmount } from "../state/swap";
+import { Field, swapActionState, swapState, TokenAmount } from "../state/swap";
 import useToasty from "../utils/toasty";
 
 const Swap: NextPage = () => {
@@ -11,33 +13,58 @@ const Swap: NextPage = () => {
   const actionState = useRecoilValue(swapActionState);
   const toasty = useToasty();
 
-  const onAChange = useCallback(
-    (tokenAmount?: TokenAmount) => {
-      setSwap((old) => ({
-        ...old,
-        tokenA: tokenAmount,
+  const rate = useMemo(() => {
+    return 1; // TODO get this from corresponding LP
+  }, []);
+
+  const handleTokenAmountChange = useCallback(
+    (field: Field, tokenAmount: TokenAmount) => {
+      setSwap(({ tokenA, tokenB }) => ({
+        tokenA:
+          field == Field.INPUT
+            ? tokenAmount
+            : tokenA
+            ? { ...tokenA, amount: tokenAmount.amount.div(rate) }
+            : undefined,
+        tokenB:
+          field == Field.OUTPUT
+            ? tokenAmount
+            : tokenB
+            ? { ...tokenB, amount: tokenAmount.amount.mul(rate) }
+            : undefined,
       }));
     },
-    [setSwap],
+    [rate, setSwap],
   );
 
-  const onBChange = useCallback(
-    (tokenAmount?: TokenAmount) => {
-      setSwap((old) => {
-        return {
-          ...old,
-          tokenB: tokenAmount,
-        };
-      });
-    },
-    [setSwap],
-  );
+  const handleTokenSwitch = useCallback(() => {
+    setSwap(({ tokenA, tokenB, ...state }) => ({
+      tokenA: tokenB,
+      tokenB: tokenA,
+      ...state,
+    }));
+  }, [setSwap]);
 
   return (
     <Container size="lg">
-      <VStack>
-        <TokenWithAmount tokenAmount={tokenA} onTokenAmountChange={onAChange} />
-        <TokenWithAmount tokenAmount={tokenB} onTokenAmountChange={onBChange} />
+      <VStack alignContent="center">
+        <TokenWithAmount
+          tokenAmount={tokenA}
+          onTokenAmountChange={(tokenAmount) =>
+            handleTokenAmountChange(Field.INPUT, tokenAmount)
+          }
+        />
+        <IconButton
+          icon={<ArrowUpDownIcon />}
+          aria-label="switch tokens"
+          onClick={handleTokenSwitch}
+        />
+        <TokenWithAmount
+          tokenAmount={tokenB}
+          onTokenAmountChange={(tokenAmount) =>
+            handleTokenAmountChange(Field.OUTPUT, tokenAmount)
+          }
+        />
         <Button disabled={!actionState.isValid} onClick={toasty}>
           Trade!
         </Button>
