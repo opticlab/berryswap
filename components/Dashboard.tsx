@@ -1,11 +1,9 @@
-import { Center, Heading } from "@chakra-ui/react";
+import { BoxProps, Center, Heading } from "@chakra-ui/react";
 
-export default function Dashboard() {
+export default function Dashboard(props: BoxProps) {
   return (
-    <Center>
-      <Heading as="h1" size="4xl">
-        Dashboard goes here
-      </Heading>
-    </Center>
+    <Heading as="h1" size="4xl" {...props}>
+      Dashboard goes here
+    </Heading>
   );
 }
