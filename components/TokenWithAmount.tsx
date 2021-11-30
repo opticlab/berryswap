@@ -1,5 +1,4 @@
 import {
-  Input,
   InputGroup,
   InputRightAddon,
   NumberInput,
@@ -7,11 +6,10 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { isBigNumberish } from "@ethersproject/bignumber/lib/bignumber";
 import { BigNumber } from "ethers";
 import { useCallback } from "react";
-import { TokenAmount } from "../state/atom/swap";
-import tokens, { Token } from "../utils/tokens";
+import { TokenAmount } from "../state/swap";
+import tokens from "../utils/tokens";
 import SelectTokenModal from "./SelectTokenModal";
 
 export interface TokenWithAmountProps {
