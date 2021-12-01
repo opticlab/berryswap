@@ -1,4 +1,14 @@
-import { Center, Flex, HStack, Spacer } from "@chakra-ui/react";
+import {
+  Center,
+  ColorModeProvider,
+  Flex,
+  HStack,
+  Spacer,
+  Stack,
+  Switch,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useBreakpoint } from "@chakra-ui/react";
 import { useCaverJsReact } from "@sixnetwork/caverjs-react-core";
 import Link from "next/link";
@@ -10,6 +20,7 @@ import TokenPrices from "./TokenPrices";
 export default function NavBar() {
   const breakpoint = useBreakpoint();
   const { account } = useCaverJsReact();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <header>
@@ -40,7 +51,12 @@ export default function NavBar() {
         </HStack>
         <Spacer />
         <Center>
-          <HStack>
+          <HStack align="center">
+            <Text>{colorMode == "light" ? "🌞" : "🌜"}</Text>
+            <Switch
+              isChecked={colorMode == "dark"}
+              onChange={toggleColorMode}
+            />
             {breakpoint != "sm" ? <TokenPrices /> : <></>}
             {account ? <DisconnectWalletButton /> : <ConnectWalletButton />}
           </HStack>
