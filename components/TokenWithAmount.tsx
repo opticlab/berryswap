@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { BigNumber } from "ethers";
 import { useCallback } from "react";
-import { TokenAmount } from "../state/swap";
+import { TokenAmount } from "../store/swap";
 import tokens from "../utils/tokens";
 import SelectTokenModal from "./SelectTokenModal";
 

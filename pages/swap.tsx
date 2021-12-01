@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { useCallback } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TokenWithAmount from "../components/TokenWithAmount";
-import { Field, swapActionState, swapState, TokenAmount } from "../state/swap";
+import { Field, swapActionState, swapState, TokenAmount } from "../store/swap";
 import useToasty from "../utils/toasty";
 
 const Swap: NextPage = () => {
