@@ -12,9 +12,9 @@ export function useKlayBalance() {
       if (account) {
         setBalance(await getKlayBalance(account));
       }
-
-      fetchBalance();
     };
+
+    fetchBalance();
   }, [account]);
 
   return balance;
