@@ -16,10 +16,8 @@ export default function TokenRow({ token }: TokenRowProps) {
     <Flex>
       <Text>{name}</Text>
       <Spacer />
-      {address && balance ? (
+      {address && balance && (
         <Text fontSize="sm">{formatUnits(balance, decimals)}</Text>
-      ) : (
-        <></>
       )}
     </Flex>
   );

@@ -6,7 +6,7 @@ import { useCallback, useMemo } from "react";
 import { useKlayBalance } from "../hooks/useKlayBalance";
 import { BASE_SCAN_URLS, networkByChainId } from "../utils/network";
 
-export default function DisconnectWalletButton() {
+export default function WalletButton() {
   const { account, deactivate, chainId } = useCaverJsReact();
   const shortendAccount = useMemo(() => {
     if (account) {
@@ -18,7 +18,7 @@ export default function DisconnectWalletButton() {
       const network = networkByChainId[chainId];
       const url = `${BASE_SCAN_URLS[network]}/account/${account}`;
 
-      window.open(url, "_ blank");
+      window.open(url, "_blank");
     }
   }, [chainId, account]);
   const klayBalance = useKlayBalance();
@@ -33,9 +33,9 @@ export default function DisconnectWalletButton() {
         {shortendAccount}
       </MenuButton>
       <MenuList>
-        <MenuItem>Klay - {formattedBalance}</MenuItem>
-        <MenuItem onClick={viewOnScan}>View on scan</MenuItem>
-        <MenuItem onClick={deactivate}>Disconnect</MenuItem>
+        <MenuItem>💳 Klay - {formattedBalance}</MenuItem>
+        <MenuItem onClick={viewOnScan}>🔬 View on scope</MenuItem>
+        <MenuItem onClick={deactivate}>🔌 Disconnect</MenuItem>
       </MenuList>
     </Menu>
   );

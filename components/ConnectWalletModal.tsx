@@ -1,11 +1,14 @@
 import {
   Flex,
+  Grid,
+  GridItem,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  SimpleGrid,
   Text,
   useToast,
 } from "@chakra-ui/react";
@@ -26,8 +29,12 @@ export default function ConnectWalletModal({
   onClose,
   ...props
 }: ConnectWalletModalProps) {
-  const { account, activate, deactivate } = useCaverJsReact();
-  const toast = useToast({ position: "top-end" });
+  const { activate } = useCaverJsReact();
+  const toast = useToast({
+    position: "top-end",
+    variant: "solid",
+    isClosable: true,
+  });
   const login = useCallback(
     async (connectorId: ConnectorNames) => {
       const connector = connectorsByName[connectorId];
@@ -53,30 +60,24 @@ export default function ConnectWalletModal({
   );
 
   return (
-    <Modal onClose={onClose} {...props}>
+    <Modal isCentered onClose={onClose} {...props}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Connect Wallet</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Flex columns={[1, null, 2]}>
-            <Card
-              width="50%"
-              onClick={() => {
-                login(ConnectorNames.Kaikas);
-              }}
-            >
-              <Text>Kaikas</Text>
-            </Card>
-            <Card
-              width="50%"
-              onClick={() => {
-                login(ConnectorNames.Klip);
-              }}
-            >
-              <Text>Klip</Text>
-            </Card>
-          </Flex>
+          <SimpleGrid column={1}>
+            {Object.entries(ConnectorNames).map(([key, value]) => (
+              <Card
+                onClick={() => {
+                  login(value);
+                }}
+                key={key}
+              >
+                {key}
+              </Card>
+            ))}
+          </SimpleGrid>
         </ModalBody>
       </ModalContent>
     </Modal>

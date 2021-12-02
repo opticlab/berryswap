@@ -1,26 +1,15 @@
-import {
-  Center,
-  ColorModeProvider,
-  Flex,
-  HStack,
-  Spacer,
-  Stack,
-  Switch,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
-import { useBreakpoint } from "@chakra-ui/react";
+import { Flex, HStack, Spacer, useBreakpoint } from "@chakra-ui/react";
 import { useCaverJsReact } from "@sixnetwork/caverjs-react-core";
 import Link from "next/link";
+import ColorModeSwitch from "./ColorModeSwitch";
 import ConnectWalletButton from "./ConnectWalletButton";
-import DisconnectWalletButton from "./DisconnectWalletButton";
 import Logo from "./Logo";
 import TokenPrices from "./TokenPrices";
+import WalletButton from "./WalletButton";
 
 export default function NavBar() {
   const breakpoint = useBreakpoint();
   const { account } = useCaverJsReact();
-  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <header>
@@ -29,38 +18,23 @@ export default function NavBar() {
         backgroundColor="brand.600"
         textColor="white"
         paddingX="1rem"
+        align="center"
       >
-        <Center>
-          <Link href="/">
-            <a>
-              <Logo />
-            </a>
-          </Link>
-        </Center>
+        <Link href="/">
+          <a>
+            <Logo />
+          </a>
+        </Link>
         <HStack px="2rem">
-          <Center>
-            <Link href="/swap">
-              <a>Swap</a>
-            </Link>
-          </Center>
-          <Center>
-            <Link href="/liquidity">
-              <a>Liquidity</a>
-            </Link>
-          </Center>
+          <Link href="/swap">Swap</Link>
+          <Link href="/liquidity">Liquidity</Link>
         </HStack>
         <Spacer />
-        <Center>
-          <HStack align="center">
-            <Text>{colorMode == "light" ? "🌞" : "🌜"}</Text>
-            <Switch
-              isChecked={colorMode == "dark"}
-              onChange={toggleColorMode}
-            />
-            {breakpoint != "sm" ? <TokenPrices /> : <></>}
-            {account ? <DisconnectWalletButton /> : <ConnectWalletButton />}
-          </HStack>
-        </Center>
+        <HStack align="center">
+          <ColorModeSwitch />
+          {breakpoint != "sm" && <TokenPrices />}
+          {account ? <WalletButton /> : <ConnectWalletButton />}
+        </HStack>
       </Flex>
     </header>
   );
