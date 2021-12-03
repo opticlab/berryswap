@@ -6,12 +6,10 @@ export default function Logo() {
   return (
     <HStack fontSize="3xl">
       <Text>🍓</Text>
-      {breakpoint != "sm" ? (
+      {breakpoint != "sm" && (
         <Text fontSize="3xl" fontWeight="bold">
           BerrySwap
         </Text>
-      ) : (
-        <></>
       )}
     </HStack>
   );
