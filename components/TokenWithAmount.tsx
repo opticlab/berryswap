@@ -7,7 +7,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { BigNumber } from "ethers";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { TokenAmount } from "../store/swap";
 import tokens from "../utils/tokens";
 import SelectTokenModal from "./SelectTokenModal";
@@ -25,6 +25,8 @@ export default function TokenWithAmount({
 }: TokenWithAmountProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const tokenList = useMemo(() => Object.values(tokens), []);
+
   const handleTokenChange = useCallback(
     (token) => {
       onTokenAmountChange({
@@ -35,7 +37,7 @@ export default function TokenWithAmount({
     [onTokenAmountChange],
   );
   const handleAmountChange = useCallback(
-    (valueString, valueNumber) => {
+    (_valueString, valueNumber) => {
       if (tokenAmount) {
         onTokenAmountChange({
           ...tokenAmount,
@@ -71,7 +73,7 @@ export default function TokenWithAmount({
       <SelectTokenModal
         isOpen={isOpen}
         onClose={onClose}
-        tokens={tokens}
+        tokens={tokenList}
         selected={tokenAmount?.token}
         onSelect={handleTokenChange}
       />
